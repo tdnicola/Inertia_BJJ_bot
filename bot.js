@@ -84,7 +84,7 @@ client.on("messageCreate", (msg) => {
             Please try sending me one of the following commands: ${commandString}`);
         }
         sendToAdmin('254838552960040960',msg);
-        //sendToAdmin('Justin#0868',msg);
+        // sendToAdmin('839161115359314020',msg);
 
     }
 });

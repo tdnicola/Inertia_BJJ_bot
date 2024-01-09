@@ -1,10 +1,11 @@
 module.exports = {
-    name: "Welcome",
+    name: "Schedule",
     async execute(message) {
+
 
         const exampleEmbed = {
             color: 0x0099ff,
-            title: 'Help Info',
+            title: 'Schedule Info',
             url: 'https://www.inertiabjj.com/',
             author: {
                 name: 'Inertia BJJ bot',
@@ -12,7 +13,7 @@ module.exports = {
             },
             fields: [
                 {
-                    name: 'Hello there and welcome to the Inertia BJJ Discords server!',
+                    name: 'Regular field title',
                     value: 'Some value here1',
                 },
               
