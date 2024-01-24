@@ -1,27 +1,25 @@
 module.exports = {
     name: "Welcome",
     async execute(message) {
+        await message.author.send(
+            'Hello there and welcome to the Inertia BJJ Discord\'s server!'+
+            '\n\nThis is a welcome message with some general details about BJJ. I also have some responses to commands.'+
+            '\n\nIf you\'re experienced with BJJ these tips most likely are already known.' +
 
-        const exampleEmbed = {
-            color: 0x0099ff,
-            title: 'Help Info',
-            url: 'https://www.inertiabjj.com/',
-            author: {
-                name: 'Inertia BJJ bot',
-                icon_url: 'https://images.squarespace-cdn.com/content/v1/5c0629cef2e6b13c0ba6b0df/c46c99fc-751c-4970-90a4-f7a46485ee97/Inertia+Brazilian+Jiu+Jitsu_U1.png?format=1500w',
-            },
-            fields: [
-                {
-                    name: 'Hello there and welcome to the Inertia BJJ Discords server!',
-                    value: 'Some value here1',
-                },
-              
-               
-            ],
-            timestamp: new Date().toISOString(),
-           
-        };
-        await message.author.send({ embeds: [exampleEmbed] });
+           `\n\n**Equipment:**`+
+                `\nAt Inertia BJJ we do not have any requirement, any color gi/no equipment is suitable. Send me the word equipment for some suggestions on gear if needed.`+
+
+            `\n\n**Hygiene:**` +
+                `\n* Gi and No Gi equipment should be washed after each and every practice session.` +
+                `\n* Shower before/after each practice. It is a solo sport but we do practice together.` +
+                `\n* Finger nails and toe nails should be trimmed (Nobody likes to be clawed from a cat)`+
+                `\n* No open wounds exposed (please cover or wear necessary bandages to cover any superficial injuries).`+
+                `\n* If you're feeling unwell please stay home and rest. Jiu Jitsu will always be there.`+
+        
+            `\n\n**Mat Rules:**` +
+                `\n* No shoes on the mats at any time.` +
+                `\n* All band aids, wraps, knee pads, mouth guards, tape, must be cleaned up by the individual before leaving the mat area.`
+        );
 
     },
 };
