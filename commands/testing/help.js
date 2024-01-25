@@ -2,25 +2,14 @@
 module.exports = {
     name: "Help",
     async execute(message) {
-        const exampleEmbed = {
-            color: 0x0099ff,
-            title: 'Help Info',
-            url: 'https://www.inertiabjj.com/',
-            author: {
-                name: 'Inertia BJJ bot',
-                icon_url: 'https://images.squarespace-cdn.com/content/v1/5c0629cef2e6b13c0ba6b0df/c46c99fc-751c-4970-90a4-f7a46485ee97/Inertia+Brazilian+Jiu+Jitsu_U1.png?format=1500w',
-            },
-            fields: [
-                {
-                    name: 'Regular field title',
-                    value: 'Some value here1',
-                },
-              
-               
-            ],
-            timestamp: new Date().toISOString(),
-           
-        };
-        await message.author.send({ embeds: [exampleEmbed] });
+        await message.author.send(
+            `Hello there! I'm a bot that Inertia BJJ made to help answer some questions. Feel free to interact with me.` +
+            `\nI look for certain words and will reply with info if any of those words match.`+
+            `\nIf nothing matches I'll send back a message advising nothing matched.`+
+            `\nFeel free to send me direct messages to get back the commands and read through them.` +
+            `\nFeel free to offer suggestions by sending the word suggestions and the suggestion ex: suggestion can we make this bot tell jokes?`
+         ) 
+
+       
     },
 };

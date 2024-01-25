@@ -2,8 +2,6 @@ module.exports = {
     name: "Tips",
     async execute(message) {
 
-
-
         const exampleEmbed = {
             color: 0x0099ff,
             title: 'Help Info',
@@ -15,7 +13,7 @@ module.exports = {
             fields: [
                 {
                     name: 'Top 10 tips:',
-                    value: `1. Relax your body. When you tense up you are sending the wrong message to your training partner (“Im going to go hard”) and you are more likely to be injured by using too much strength.`
+                    value: `1. Relax. When you tense up you are sending the wrong message to your training partner (“Im going to go hard”) and you are more likely to be injured by using too much strength.`
                 },
                 {
                     name: '',
@@ -23,7 +21,7 @@ module.exports = {
                 },
                 {
                     name: '',
-                    value: `3. Nothing matters more than mat time. You have to be on the mat learning and practicing. The best advice I ever got was “just keep showing up”. That was nearly 8 years ago.` 
+                    value: `3. Nothing matters more than mat time. You have to be on the mat learning and practicing. The best advice I ever got was “just keep showing up”. That was nearly 15 years ago.` 
                 },
                 {
                     name: '',
@@ -48,7 +46,7 @@ module.exports = {
                 },
                 {
                     name:   '',
-                    value: `9. Ignore the belt system as a sign of progress. The belt system is inherently flawed. Belt promotions are complex decisions that involve skill level, mat time, competition performance, dedication to the art, teaching ability, and dozens of other variables. All you should worry about is getting on the mat as much as possible.` 
+                    value: `9. Ignore the belt system as a sign of progress. Belt promotions are complex decisions that involve skill level, mat time, competition performance, dedication to the art, teaching ability, and dozens of other variables. All you should worry about is getting on the mat as much as possible.` 
                 },
                 {
                     name:   '',
