@@ -23,20 +23,15 @@ const client = new Client({
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, "commands");
-const commandFolders = fs.readdirSync(foldersPath);
+const commandPath = fs.readdirSync(foldersPath);
 
-for (const folder of commandFolders) {
-    const commandsPath = path.join(foldersPath, folder);
-    const commandFiles = fs
-        .readdirSync(commandsPath)
-        .filter((file) => file.endsWith(".js"));
-    for (const file of commandFiles) {
-        const filePath = path.join(commandsPath, file);
-        const command = require(filePath);
-        // Set a new item in the Collection with the key as the command name and the value as the exported module
-        client.commands.set(command.name, command);
-    }
+for (const file of commandPath) {
+    const filePath = path.join(foldersPath, file);
+    const command = require(filePath);
+    // Set a new item in the Collection with the key as the command name and the value as the exported module
+    client.commands.set(command.name, command);
 }
+
 // When the client is ready, run this code (only once).
 client.once(Events.ClientReady, (readyClient) => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
@@ -68,7 +63,7 @@ client.on("messageCreate", (msg) => {
             .send(`${msg.author.username} has joined the server!`);
     }
     if (msg.content.startsWith('!poll') ) {
-        let poll = client.commands.find((file) => file.name == 'poll').execute
+        let poll = client.commands.find((file) => file.name == 'Poll').execute
         poll(msg)
     }
     if (!msg.guild) {

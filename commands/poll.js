@@ -1,6 +1,6 @@
 
 module.exports = {
-    name: "poll",
+    name: "Poll",
     async execute(message) {
         if (!message.guild) {
             message.channel.send(
