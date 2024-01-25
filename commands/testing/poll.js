@@ -8,7 +8,7 @@ module.exports = {
 
         let pollOptions = msg.split(separator)
         pollOptions.shift()
-
+      
         if (pollOptions.length > 0) {
             question = msg.split(separator)[0]
             question = question.split(' ')
@@ -63,13 +63,13 @@ module.exports = {
                 Description: alphabetIconArray.join("\n\n")
              }
          
-            message.author.send({ embeds: [exampleEmbed] })
+            message.channel.send({ embeds: [exampleEmbed] })
             .then((msg) => {
                 for (let i = 0; i < pollOptions.length; i++) {
                     msg.react(alphabet[i]);
                 }
             });
-        }
+        } else message.channel.send('What kinda poll has no options? "!poll which is better? +cats +dogs')
 
     },
 };

@@ -67,6 +67,10 @@ client.on("messageCreate", (msg) => {
             .get("969519390951366676")
             .send(`${msg.author.username} has joined the server!`);
     }
+    if (msg.content.startsWith('!poll') ) {
+        let poll = client.commands.find((file) => file.name == 'poll').execute
+        poll(msg)
+    }
     if (!msg.guild) {
         if (msg.author.bot) return;
         let wordsMatch = client.commands.size;
