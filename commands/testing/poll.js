@@ -2,6 +2,15 @@
 module.exports = {
     name: "poll",
     async execute(message) {
+        if (!message.guild) {
+            message.channel.send(
+                `Used to send polls. Can create on normal guild channels. Please start message with !poll and seperate poll options by + seperators` +
+                `\n"!poll question +pollOption1 +pollOption2"` +
+                `\nFor example: !poll Which position is your favorite? +mount +sidecontrol +guard`
+                )
+                return
+        }
+
         const msg =  message.content.toLowerCase()
         separator = "+";
         message.content.toLowerCase()
