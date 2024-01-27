@@ -12,7 +12,7 @@ Welcome to the Inertia BJJ Discord bot! This bot is designed to assist users, es
 ## Getting Started
 
 1. **Invite the Bot:**
-   - Use the provided invite link to add the Inertia BJJ bot to your Discord server. Currently only set up for inertiaBJJ. Will update with link in future. (1/25/23)
+   - Use the provided invite link to add the Inertia BJJ bot to your Discord server. Currently only set up for InertiaBJJ. Will update with link in future. (1/25/23)
 
 2. **Ineraction:**
    - The default method to communicate with the bot is through private message. Just send a private message to the bot and it will comment back if the question contains a keyword (e.g., `hygiene`).

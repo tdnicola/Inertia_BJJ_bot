@@ -22,8 +22,8 @@ module.exports = {
                     \nSome Online Suggestions:\nwartribe gear \nKingz \nMaeda \nFuji \n93 Brand \nInverted Gear \nbjjhq.com sells random daily gear at discount.
                     
                     \nAny Judo or BJJ GI can do the job
-                    \nBe aware that if you plan on travelling or competing Some schools/competitions may have Color requirements on gis (for example: only wear black/blue/white gis).
-                    \n At InertiaBJJ we do not have any such requirement, any color gi/no equipment is suitable.`,
+                    \nBe aware that if you plan on travelling or competing some schools/competitions may have color requirements on gis (for example: only wear black/blue/white gis).
+                    \n At InertiaBJJ we do not have any such requirement, any color gi/no-gi equipment is suitable.`,
                 },
               
             ],
