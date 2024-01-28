@@ -8,6 +8,10 @@ const {
 const { token } = require("./config.json");
 const fs = require("node:fs");
 const path = require("node:path");
+const foldersPath = path.join(__dirname, "commands");
+const commandPath = fs.readdirSync(foldersPath);
+const welcome = require(`./welcome.js`);
+
 
 // Create a new client instance
 const client = new Client({
@@ -22,9 +26,6 @@ const client = new Client({
 
 client.commands = new Collection();
 
-const foldersPath = path.join(__dirname, "commands");
-const commandPath = fs.readdirSync(foldersPath);
-
 for (const file of commandPath) {
     const filePath = path.join(foldersPath, file);
     const command = require(filePath);
@@ -35,6 +36,7 @@ for (const file of commandPath) {
 // When the client is ready, run this code (only once).
 client.once(Events.ClientReady, (readyClient) => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+    welcome(client)
 });
 
 let commandArray = [];
@@ -54,12 +56,18 @@ const sendToAdmin = (admin, chatMessage) => {
     }
 };
 
+
 client.on("messageCreate", (msg) => {
-    let isWelcomeMessage = msg.type === "GUILD_MEMBER_JOIN";
+    if (msg.author.bot) return;
+
+    let isWelcomeMessage = msg.type === 7; //Welcome
     if (isWelcomeMessage) {
+        let welcome = client.commands.find((file) => file.name == 'Welcome').execute
+        welcome(msg)
         msg.author.send(`Welcome to the server, ${msg.author.username}!`);
         client.channels.cache
-            .get("969519390951366676")
+            .get("513160441187270661") //IphoneGrabbies channel
+            // .get("969519390951366676") //InertiaBJJ channel
             .send(`${msg.author.username} has joined the server!`);
     }
     if (msg.content.startsWith('!poll') ) {
@@ -67,7 +75,6 @@ client.on("messageCreate", (msg) => {
         poll(msg)
     }
     if (!msg.guild) {
-        if (msg.author.bot) return;
         let wordsMatch = client.commands.size;
         let noMatch = 0;
 
