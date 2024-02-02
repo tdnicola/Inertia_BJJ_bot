@@ -11,7 +11,8 @@ module.exports = {
                 icon_url: 'https://images.squarespace-cdn.com/content/v1/5c0629cef2e6b13c0ba6b0df/c46c99fc-751c-4970-90a4-f7a46485ee97/Inertia+Brazilian+Jiu+Jitsu_U1.png?format=1500w',
             },
             description: 'Schedule is subject to change. Please confirm with Coach Justin if there are any questions.' +
-                        '\nThere is also a "new-gym-schedule" chat that contains schedule information.',
+                        '\nThere is also a "new-gym-schedule" chat that contains schedule information.' +
+                        '\nPlease send me the word classes to get a breakdown of what the class types are.',
 
             fields: [
                 {

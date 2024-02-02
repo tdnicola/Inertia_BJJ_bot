@@ -72,6 +72,8 @@ client.on("messageCreate", (msg) => {
     } catch {
         sendToAdmin('254838552960040960', `Error in welcome message: ${msg}`);
     }
+
+    // Polling
     try {
 
         if (msg.content.startsWith('!poll') ) {
@@ -81,8 +83,9 @@ client.on("messageCreate", (msg) => {
     } catch {
         sendToAdmin('254838552960040960', `Error in Poll message: ${msg}`);
     }
+    
+    //Normal Commands
     try {
-
         if (!msg.guild) {
             let wordsMatch = client.commands.size;
             let noMatch = 0;
