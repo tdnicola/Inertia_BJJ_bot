@@ -114,6 +114,31 @@ client.on("messageCreate", (msg) => {
     } catch {
         sendToAdmin('254838552960040960', `Error in private message command: ${msg}`);
     }
+    
+    //new student channels
+    try {
+        if (msg.channelId == 1203057635994112030) { 
+        // if (msg.channelId == 839325180409020426) { 
+            let wordsMatch = client.commands.size;
+            let noMatch = 0;
+            
+            client.commands.forEach((file) => {
+                if (msg.content.toLowerCase().includes(file.name.toLowerCase())) {
+                    file.execute(msg);
+                } else {
+                    noMatch += 1;
+                }
+            });
+            if (noMatch == wordsMatch) {
+                msg.channel.send(`I'm sorry I didn't find a match of my commands. \nPlease try sending me one of the following commands: ${commandString}`);
+            }
+            sendToAdmin('254838552960040960',msg);
+        }
+    } catch {
+        sendToAdmin('254838552960040960', `Error in new student message command: ${msg}`);
+
+    }
+
 });
 
 client.login(token);
