@@ -2,7 +2,6 @@ module.exports = {
     name: "Terms",
     async execute(message) {
 
-
         const exampleEmbed = {
             color: 0x0099ff,
             title: 'Help Info',
@@ -20,7 +19,6 @@ module.exports = {
                     \nJiu Jitsu Chess/ Flow rolling: This is where move by move techniques are performed in an “I go, you go” fashion. This is done smoothly and slowly. Pace can be picked up into a flow once skill acquisition and movement awareness is achieved.`,
                 },
               
-               
             ],
             timestamp: new Date().toISOString(),
            

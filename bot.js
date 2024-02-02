@@ -4,12 +4,14 @@ const {
     GatewayIntentBits,
     Partials,
     Collection,
+    ActivityType
 } = require("discord.js");
 const { token } = require("./config.json");
 const fs = require("node:fs");
 const path = require("node:path");
 const foldersPath = path.join(__dirname, "commands");
 const commandPath = fs.readdirSync(foldersPath);
+
 
 // Create a new client instance
 const client = new Client({
@@ -35,6 +37,11 @@ for (const file of commandPath) {
 // When the client is ready, run this code (only once).
 client.once(Events.ClientReady, (readyClient) => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+    readyClient.user.setActivity({
+        name: 'you roll',
+        type: ActivityType.Watching
+    })
+
 });
 
 let commandArray = [];
