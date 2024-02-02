@@ -25,6 +25,8 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+let commandArray = [];
+
 
 for (const file of commandPath) {
     const filePath = path.join(foldersPath, file);
@@ -32,22 +34,9 @@ for (const file of commandPath) {
 
     // Set a new item in the Collection with the key as the command name and the value as the exported module
     client.commands.set(command.name, command);
-}
-
-// When the client is ready, run this code (only once).
-client.once(Events.ClientReady, (readyClient) => {
-    console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-    readyClient.user.setActivity({
-        name: 'you roll',
-        type: ActivityType.Watching
-    })
-
-});
-
-let commandArray = [];
-client.commands.forEach((command) => {
     commandArray.push(command.name);
-});
+
+}
 
 let commandString = commandArray.join(", ");
 
@@ -61,6 +50,17 @@ const sendToAdmin = (admin, chatMessage) => {
         console.log(`Error sending to admin: ${error}`);
     }
 };
+
+// When the client is ready, run this code (only once).
+client.once(Events.ClientReady, (readyClient) => {
+    console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+    readyClient.user.setActivity({
+        name: 'you roll',
+        type: ActivityType.Watching
+    })
+
+});
+
 
 client.on("messageCreate", (msg) => {
     if (msg.author.bot) return;
