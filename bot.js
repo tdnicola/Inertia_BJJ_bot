@@ -6,7 +6,8 @@ const {
     Collection,
     ActivityType
 } = require("discord.js");
-const { token } = require("./config.json");
+const { token } = require("./config.js");
+
 const fs = require("node:fs");
 const path = require("node:path");
 const foldersPath = path.join(__dirname, "commands");
@@ -66,14 +67,13 @@ client.on("messageCreate", (msg) => {
     if (msg.author.bot) return;
     // Welcome
     try {
-
         if (msg.type === 7) {
             let welcome = client.commands.find((file) => file.name == 'Welcome').execute
             welcome(msg)
             msg.author.send(`Welcome to the server, ${msg.author.username}!`);
             client.channels.cache
-            .get("513160441187270661") //IphoneGrabbies channel
-            // .get("969519390951366676") //InertiaBJJ channel
+            // .get("513160441187270661") //IphoneGrabbies channel
+            .get("839353404065316874") //InertiaBJJ channel
             .send(`${msg.author.username} has joined the server!`);
         }
     } catch {
@@ -108,7 +108,7 @@ client.on("messageCreate", (msg) => {
                 msg.author.send(`I'm sorry I didn't find a match of my commands. \nPlease try sending me one of the following commands: ${commandString}`);
             }
             sendToAdmin('254838552960040960',msg);
-            // sendToAdmin('839161115359314020',msg);
+            sendToAdmin('839161115359314020',msg);
         } 
 
     } catch {
@@ -136,7 +136,6 @@ client.on("messageCreate", (msg) => {
         }
     } catch {
         sendToAdmin('254838552960040960', `Error in new student message command: ${msg}`);
-
     }
 
 });

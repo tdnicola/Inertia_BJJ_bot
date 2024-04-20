@@ -18,7 +18,7 @@ module.exports = {
                 {
                     name: 'Monday',
                     value: `\n* BJJ 101: 6:30pm-7:30pm`+
-                    `\n* OpenMat 7:30pm-8:30pm` 
+                    `\n* BJJ 201 | OpenMat 7:30pm-8:30pm` 
                 }, 
                 {
                     name: 'Tuesday',
@@ -34,7 +34,7 @@ module.exports = {
                 {
                     name: 'Thursday',
                     value:  `\n* Morning BJJ: 9:00am-10:00am`+
-                    `\n* BJJ 101: 6:30pm-7:30pm`+
+                    `\n* BJJ 101 (No-Gi): 6:30pm-7:30pm`+
                     `\n* OpenMat | Competition: 7:30pm-8:30pm` 
                 },
                 {
