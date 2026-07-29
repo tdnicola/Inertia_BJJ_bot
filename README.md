@@ -17,8 +17,8 @@ Welcome to the Inertia BJJ Discord bot! This bot is designed to assist users, es
 2. **Ineraction:**
    - The default method to communicate with the bot is through private message. Just send a private message to the bot and it will comment back if the question contains a keyword (e.g., `hygiene`).
 
-3. **Prefix:**
-   - The default command prefix is `!`. Currently the only command that is allowable in normal channels is `!poll` seperated by +polloptions (e.g., `!poll Anyone coming to open mat on saturday? +Yes +No`).
+3. **Interaction:**
+   - Commands are triggered by keyword match in a DM to the bot, or in the designated new-student channel.
 
 
 ## Support and Feedback
