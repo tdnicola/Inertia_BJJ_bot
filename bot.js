@@ -72,13 +72,13 @@ const notifyAdminsOfError = async (context, error) => {
     await Promise.all(ADMIN_IDS.map((adminId) => sendAdminDM(adminId, `${context}: ${error}`)));
 };
 
-const matchAndExecute = (msg, replyTarget) => {
+const matchAndExecute = async (msg, replyTarget) => {
     const content = msg.content.toLowerCase();
     const matchedCommand = client.commands.find((cmd) => content.includes(cmd.name.toLowerCase()));
     if (matchedCommand) {
-        matchedCommand.execute(msg);
+        await matchedCommand.execute(msg);
     } else {
-        replyTarget.send(`I'm sorry I didn't find a match of my commands. \nPlease try sending me one of the following commands: ${commandString}`);
+        await replyTarget.send(`I'm sorry I didn't find a match of my commands. \nPlease try sending me one of the following commands: ${commandString}`);
     }
 };
 
