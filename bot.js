@@ -114,7 +114,7 @@ client.on("messageCreate", async (msg) => {
     //Normal Commands
     try {
         if (!msg.guild) {
-            matchAndExecute(msg, msg.author);
+            await matchAndExecute(msg, msg.author);
             sendToAdmin(msg);
         }
 
@@ -125,7 +125,7 @@ client.on("messageCreate", async (msg) => {
     //new student channels
     try {
         if (msg.channelId == 1203057635994112030) {
-            matchAndExecute(msg, msg.channel);
+            await matchAndExecute(msg, msg.channel);
             sendToAdmin(msg);
         }
     } catch (error) {
