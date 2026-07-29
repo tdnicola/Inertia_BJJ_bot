@@ -18,6 +18,7 @@ const commandPath = fs.readdirSync(foldersPath);
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
         GatewayIntentBits.DirectMessages,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
@@ -41,14 +42,43 @@ for (const file of commandPath) {
 
 let commandString = commandArray.join(", ");
 
-const sendToAdmin = (admin, chatMessage) => {
+const ADMIN_IDS = ['254838552960040960', '839161115359314020'];
+const adminUserCache = new Map();
+
+const getAdminUser = async (adminId) => {
+    if (!adminUserCache.has(adminId)) {
+        adminUserCache.set(adminId, await client.users.fetch(adminId));
+    }
+    return adminUserCache.get(adminId);
+};
+
+const sendAdminDM = async (adminId, text) => {
     try {
-        client.users.send(
-            admin,
-            `\nUser: ${chatMessage.author.username} sent the discord bot: "${chatMessage}"`
-        );
+        const adminUser = await getAdminUser(adminId);
+        await adminUser.send(text);
     } catch (error) {
-        console.log(`Error sending to admin: ${error}`);
+        console.error(`Error sending to admin ${adminId}: ${error}`);
+    }
+};
+
+const sendToAdmin = (chatMessage) => {
+    ADMIN_IDS.forEach((adminId) =>
+        sendAdminDM(adminId, `\nUser: ${chatMessage.author.username} sent the discord bot: "${chatMessage.content}"`)
+    );
+};
+
+const notifyAdminsOfError = async (context, error) => {
+    console.error(`${context}: ${error}`);
+    await Promise.all(ADMIN_IDS.map((adminId) => sendAdminDM(adminId, `${context}: ${error}`)));
+};
+
+const matchAndExecute = async (msg, replyTarget) => {
+    const content = msg.content.toLowerCase();
+    const matchedCommand = client.commands.find((cmd) => content.includes(cmd.name.toLowerCase()));
+    if (matchedCommand) {
+        await matchedCommand.execute(msg);
+    } else {
+        await replyTarget.send(`I'm sorry I didn't find a match of my commands. \nPlease try sending me one of the following commands: ${commandString}`);
     }
 };
 
@@ -63,79 +93,43 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 
-client.on("messageCreate", (msg) => {
+client.on(Events.GuildMemberAdd, async (member) => {
+    if (member.user.bot) return;
+
+    try {
+        const welcome = client.commands.get('Welcome');
+        await welcome.sendWelcomeMessage(member.user);
+        client.channels.cache
+            .get("839353404065316874")
+            .send(`${member.user.username} has joined the server!`);
+        await sendAdminDM('254838552960040960', `${member.user.username} (${member.user.id}) just joined the server.`);
+    } catch (error) {
+        await notifyAdminsOfError('Error in welcome message', error);
+    }
+});
+
+client.on("messageCreate", async (msg) => {
     if (msg.author.bot) return;
-    // Welcome
-    try {
-        if (msg.type === 7) {
-            let welcome = client.commands.find((file) => file.name == 'Welcome').execute
-            welcome(msg)
-            msg.author.send(`Welcome to the server, ${msg.author.username}!`);
-            client.channels.cache
-            // .get("513160441187270661") //IphoneGrabbies channel
-            .get("839353404065316874") //InertiaBJJ channel
-            .send(`${msg.author.username} has joined the server!`);
-        }
-    } catch {
-        sendToAdmin('254838552960040960', `Error in welcome message: ${msg}`);
-    }
 
-    // Polling
-    try {
-
-        if (msg.content.startsWith('!poll') ) {
-            let poll = client.commands.find((file) => file.name == 'Poll').execute
-            poll(msg)
-        }
-    } catch {
-        sendToAdmin('254838552960040960', `Error in Poll message: ${msg}`);
-    }
-    
     //Normal Commands
     try {
         if (!msg.guild) {
-            let wordsMatch = client.commands.size;
-            let noMatch = 0;
-            
-            client.commands.forEach((file) => {
-                if (msg.content.toLowerCase().includes(file.name.toLowerCase())) {
-                    file.execute(msg);
-                } else {
-                    noMatch += 1;
-                }
-            });
-            if (noMatch == wordsMatch) {
-                msg.author.send(`I'm sorry I didn't find a match of my commands. \nPlease try sending me one of the following commands: ${commandString}`);
-            }
-            sendToAdmin('254838552960040960',msg);
-            sendToAdmin('839161115359314020',msg);
-        } 
+            await matchAndExecute(msg, msg.author);
+            sendToAdmin(msg);
+        }
 
-    } catch {
-        sendToAdmin('254838552960040960', `Error in private message command: ${msg}`);
+    } catch (error) {
+        await notifyAdminsOfError('Error in private message command', error);
     }
-    
+
     //new student channels
     try {
-        if (msg.channelId == 1203057635994112030) { 
-        // if (msg.channelId == 839325180409020426) { 
-            let wordsMatch = client.commands.size;
-            let noMatch = 0;
-            
-            client.commands.forEach((file) => {
-                if (msg.content.toLowerCase().includes(file.name.toLowerCase())) {
-                    file.execute(msg);
-                } else {
-                    noMatch += 1;
-                }
-            });
-            if (noMatch == wordsMatch) {
-                msg.channel.send(`I'm sorry I didn't find a match of my commands. \nPlease try sending me one of the following commands: ${commandString}`);
-            }
-            sendToAdmin('254838552960040960',msg);
+        if (msg.channelId == 1203057635994112030) {
+            await matchAndExecute(msg, msg.channel);
+            sendToAdmin(msg);
         }
-    } catch {
-        sendToAdmin('254838552960040960', `Error in new student message command: ${msg}`);
+    } catch (error) {
+        await notifyAdminsOfError('Error in new student message command', error);
     }
 
 });
